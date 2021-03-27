@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="apache-maven-3.6.3-bin">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../apache-maven-3.6.3-bin.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../telegrambots-3.6-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../poi-bin-5.0.0-20210120.zip!/poi-5.0.0/docs/apidocs/dev" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
