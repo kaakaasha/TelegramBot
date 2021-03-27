@@ -49,26 +49,35 @@ public class Bot extends TelegramLongPollingBot {
         List<KeyboardRow> keyboardRowList = new ArrayList<>();//создаем лист кнопок
         KeyboardRow keyboardFirstRow = new KeyboardRow();//первая строка кнопок
 
-        keyboardFirstRow.add(new KeyboardButton("привет"));
+        keyboardFirstRow.add(new KeyboardButton("Привет"));
+        keyboardFirstRow.add(new KeyboardButton("Подскажи игру"));
+        keyboardFirstRow.add(new KeyboardButton("Пока"));
+
 
         keyboardRowList.add(keyboardFirstRow);//добавляем все строчки в список
         replyKeyboardMarkup.setKeyboard(keyboardRowList);//устанавливаем список
 
     }
+    public void sad(){
+        String game1 = "fds";
+    }
 
     @Override
-    public void onUpdateReceived(Update update) { //прием сообщений
+    public void onUpdateReceived(Update update){ //прием сообщений
         Message message = update.getMessage(); //в объекте будет текст из сообщений
         if (message !=null && message.hasText()){
             switch (message.getText()){
-                case "привет":
+                case "Привет":
                      sendMsg(message,"Привет!");
                     break;
-                case "пока":
-                    sendMsg(message,"Пока!");
-                case "Кто я?":
-                    sendMsg(message,"Ты ходячий секс)");
+                case "Пока":
+                    sendMsg(message,"До скорой встречи!");
+                    break;
+                case "Подскажи игру":
+                    sendMsg(message,Game.);
+                    break;
                 default:
+                    break;
             }
         }
     }
