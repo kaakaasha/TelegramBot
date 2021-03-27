@@ -3,8 +3,14 @@ import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButton;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bot extends TelegramLongPollingBot {
     public static void main(String[] args) {
@@ -26,10 +32,28 @@ public class Bot extends TelegramLongPollingBot {
         sendMessage.setReplyToMessageId(message.getMessageId());//на какое именно сообщение ответить
         sendMessage.setText(text);
         try {
+            setButton(sendMessage);
             sendMessage(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setButton(SendMessage sendMessage){
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();//клавиатура
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);//разметка клавиатуры
+        replyKeyboardMarkup.setSelective(true);//вывод всем
+        replyKeyboardMarkup.setResizeKeyboard(true);//количество кнопок больше или меньше
+        replyKeyboardMarkup.setOneTimeKeyboard(false);//скрывать или нет кнопки после нажатия
+        //создание самой кнопки
+        List<KeyboardRow> keyboardRowList = new ArrayList<>();//создаем лист кнопок
+        KeyboardRow keyboardFirstRow = new KeyboardRow();//первая строка кнопок
+
+        keyboardFirstRow.add(new KeyboardButton("привет"));
+
+        keyboardRowList.add(keyboardFirstRow);//добавляем все строчки в список
+        replyKeyboardMarkup.setKeyboard(keyboardRowList);//устанавливаем список
+
     }
 
     @Override
@@ -40,6 +64,10 @@ public class Bot extends TelegramLongPollingBot {
                 case "привет":
                      sendMsg(message,"Привет!");
                     break;
+                case "пока":
+                    sendMsg(message,"Пока!");
+                case "Кто я?":
+                    sendMsg(message,"Ты ходячий секс)");
                 default:
             }
         }
