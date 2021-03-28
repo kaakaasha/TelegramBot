@@ -9,6 +9,7 @@ import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +75,11 @@ public class Bot extends TelegramLongPollingBot {
                     sendMsg(message,"До скорой встречи!");
                     break;
                 case "Подскажи игру":
-                    sendMsg(message,Game.);
+                    try {
+                        sendMsg(message,Game.game(message.getText()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 default:
                     break;
